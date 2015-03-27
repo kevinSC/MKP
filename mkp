@@ -1,0 +1,50 @@
+#!/bin/bash
+
+#enter into the Programs folder
+cd /home/kevin/Programs
+echo "Langue?"
+read langue
+
+case $langue in
+	"c++") cd Cplus ;;
+	"js")  cd JavaScript ;;
+	"bash") cd shell-tuto ;;
+esac
+
+echo "Proyect?"
+read proyect
+mkdir $proyect
+cd $proyect
+echo "Name File?"
+read file
+case $langue in
+	"c++") filee="$file.cpp" ;;
+	"js")  filee="$file.js" ;;
+	"bash")  filee="$file.sh" ;;
+	*) echo "no extension" ;;
+esac	
+touch $filee
+if [ "$langue" == "c++" ]
+	then
+		echo "#!/bin/bash" > run
+		echo "g++ $filee -o $file -DLINUX" >> run
+		echo "./$file" >> run
+		chmod +x run 
+		cp  /home/kevin/Programs/Cplus/Age/concolor.h $(pwd)
+fi
+# write a document .sublime_project
+echo "{" > $proyect.sublime-project
+echo "	\"folders\":" >> $proyect.sublime-project
+echo "	[" >> $proyect.sublime-project
+echo "		{" >> $proyect.sublime-project
+echo "			\"follow_symlinks\": true," >> $proyect.sublime-project
+echo "			\"path\": \".\"" >> $proyect.sublime-project
+echo "		}" >> $proyect.sublime-project
+echo "	]" >> $proyect.sublime-project
+echo "}" >> $proyect.sublime-project
+
+#write an alias
+echo "alias $proyect='cd $(pwd)'" >> ~/.bashrc
+
+#open sublime in the folder
+subl3 $(pwd)
