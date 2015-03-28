@@ -2,15 +2,19 @@
 
 #enter into the Programs folder
 cd /home/kevin/Programs
+
+# ask for the langue
 echo "Langue?"
 read langue
 
+#Enter in the folder corresponding with the langue
 case $langue in
 	"c++") cd Cplus ;;
 	"js")  cd JavaScript ;;
 	"bash") cd shell-tuto ;;
 esac
 
+#ask for the name of the Proyect
 echo "Proyect?"
 read proyect
 mkdir $proyect
