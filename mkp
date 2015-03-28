@@ -14,11 +14,13 @@ case $langue in
 	"bash") cd shell-tuto ;;
 esac
 
-#ask for the name of the Proyect
+#ask for the name of the Proyect to create it 
 echo "Proyect?"
 read proyect
 mkdir $proyect
 cd $proyect
+
+#ask for the name of the file and create it
 echo "Name File?"
 read file
 case $langue in
@@ -28,13 +30,16 @@ case $langue in
 	*) echo "no extension" ;;
 esac	
 touch $filee
+
+#select special features for each langue in each proyect
 if [ "$langue" == "c++" ]
 	then
 		echo "#!/bin/bash" > run
-		echo "g++ $filee -o $file -DLINUX" >> run
+		echo "g++ $filee -o $file" >> run
+		echo "echo -e '\E[01;33m'"  >> run
 		echo "./$file" >> run
+		echo "tput sgr0 #" >> run
 		chmod +x run 
-		cp  /home/kevin/Programs/Cplus/Age/concolor.h $(pwd)
 fi
 # write a document .sublime_project
 echo "{" > $proyect.sublime-project
